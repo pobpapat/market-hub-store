@@ -86,7 +86,7 @@ build_backend:
 deploy_production:
   stage: deploy
   script:
-    - echo "🚀 Deploying to production..."
+    - echo "Deploying to production..."
     - echo "Backend: Deploy dist/ folder"
     - echo "Frontend: Deploy .next/ folder"
   only:
