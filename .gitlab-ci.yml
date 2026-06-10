@@ -86,11 +86,6 @@ build_backend:
 deploy_production:
   stage: deploy
   script:
-    - echo "Deploying to production..."
-    - echo "Backend: Deploy dist/ folder"
-    - echo "Frontend: Deploy .next/ folder"
+    - echo "Deploying to production"
   only:
     - main
-  environment:
-    name: production
-    url: https://your-production-url.com
