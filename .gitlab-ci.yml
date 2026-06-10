@@ -1,6 +1,9 @@
 stages:
   - install
+  - lint
+  - build
   - test
+  - deploy
 
 variables:
   # Configure PostgreSQL service container
@@ -50,3 +53,44 @@ run_tests:
     - npx prisma db push --accept-data-loss
     # Run API and integration tests
     - npm run test
+
+lint_frontend:
+  stage: lint
+  before_script:
+    - cd frontend
+  script:
+    - npm run lint
+
+build_frontend:
+  stage: build
+  before_script:
+    - cd frontend
+  script:
+    - npm run build
+  artifacts:
+    paths:
+      - frontend/.next
+    expire_in: 1 day
+
+build_backend:
+  stage: build
+  before_script:
+    - cd backend
+  script:
+    - npm run build
+  artifacts:
+    paths:
+      - backend/dist
+    expire_in: 1 day
+
+deploy_production:
+  stage: deploy
+  script:
+    - echo "🚀 Deploying to production..."
+    - echo "Backend: Deploy dist/ folder"
+    - echo "Frontend: Deploy .next/ folder"
+  only:
+    - main
+  environment:
+    name: production
+    url: https://your-production-url.com
