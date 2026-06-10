@@ -1,0 +1,49 @@
+stages:
+  - install
+  - test
+
+variables:
+  # Configure PostgreSQL service container
+  POSTGRES_DB: test_db
+  POSTGRES_USER: test_user
+  POSTGRES_PASSWORD: test_password
+  POSTGRES_HOST_AUTH_METHOD: trust
+  # PostgreSQL service hostname is "postgres"
+  DATABASE_URL: "postgresql://test_user:test_password@postgres:5432/test_db?schema=public"
+
+default:
+  image: node:20-alpine
+  cache:
+    key:
+      files:
+        - backend/package-lock.json
+        - frontend/package-lock.json
+    paths:
+      - backend/node_modules/
+      - frontend/node_modules/
+      - .npm/
+
+install_deps:
+  stage: install
+  script:
+    - cd backend && npm ci
+    - cd ../frontend && npm ci
+  artifacts:
+    paths:
+      - backend/node_modules/
+      - frontend/node_modules/
+    expire_in: 1 hour
+
+run_tests:
+  stage: test
+  services:
+    - name: postgres:16-alpine
+      alias: postgres
+  script:
+    - cd backend
+    # Generate Prisma Client
+    - npx prisma generate
+    # Push database schema to PostgreSQL container for testing
+    - npx prisma db push --accept-data-loss
+    # Run API and integration tests
+    - npm run test
