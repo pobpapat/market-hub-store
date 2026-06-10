@@ -26,8 +26,10 @@ default:
 install_deps:
   stage: install
   script:
-    - cd backend && npm ci
-    - cd ../frontend && npm ci
+    - cd backend
+    - npm ci
+    - cd ../frontend
+    - npm ci
   artifacts:
     paths:
       - backend/node_modules/
@@ -39,8 +41,9 @@ run_tests:
   services:
     - name: postgres:16-alpine
       alias: postgres
-  script:
+  before_script:
     - cd backend
+  script:
     # Generate Prisma Client
     - npx prisma generate
     # Push database schema to PostgreSQL container for testing
