@@ -1,6 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+
+// ✅ ย้าย API_URL ออกมาข้างนอก component เพื่อให้ useCallback deps array ไม่ต้อง include ค่านี้
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
 interface User {
   id: number;
@@ -19,40 +22,43 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
-
-  const fetchHealth = async () => {
+  // ✅ useCallback เพื่อให้ function reference stable → useEffect deps ถูกต้อง
+  const fetchHealth = useCallback(async () => {
     try {
       const res = await fetch(`${API_URL}/api/health`);
       if (!res.ok) throw new Error("Server returned error status");
       const data = await res.json();
       setHealth(data);
       setHealthError(null);
-    } catch (err: any) {
+    } catch (err: unknown) {
+      // ✅ ใช้ unknown แทน any + type narrowing ด้วย instanceof
       setHealth(null);
-      setHealthError(err.message || "Failed to reach server");
+      setHealthError(err instanceof Error ? err.message : "Failed to reach server");
     }
-  };
+  }, []);
 
-  const fetchUsers = async () => {
+  // ✅ useCallback เพื่อให้ function reference stable
+  const fetchUsers = useCallback(async () => {
     try {
       const res = await fetch(`${API_URL}/api/users`);
       if (!res.ok) throw new Error("Failed to fetch users");
       const data = await res.json();
       setUsers(data);
       setUsersError(null);
-    } catch (err: any) {
-      setUsersError(err.message || "Failed to fetch users");
+    } catch (err: unknown) {
+      // ✅ ใช้ unknown แทน any + type narrowing ด้วย instanceof
+      setUsersError(err instanceof Error ? err.message : "Failed to fetch users");
     }
-  };
+  }, []);
 
+  // ✅ เพิ่ม fetchHealth, fetchUsers ใน deps array
   useEffect(() => {
     fetchHealth();
     fetchUsers();
     // Poll health status every 10 seconds
     const interval = setInterval(fetchHealth, 10000);
     return () => clearInterval(interval);
-  }, []);
+  }, [fetchHealth, fetchUsers]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -76,8 +82,9 @@ export default function Home() {
       setName("");
       setSubmitSuccess(true);
       fetchUsers();
-    } catch (err: any) {
-      alert(err.message || "Something went wrong");
+    } catch (err: unknown) {
+      // ✅ ใช้ unknown แทน any + type narrowing ด้วย instanceof
+      alert(err instanceof Error ? err.message : "Something went wrong");
     } finally {
       setLoading(false);
     }
