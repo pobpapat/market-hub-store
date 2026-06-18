@@ -3,6 +3,13 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import prisma from './prisma';
 
+import authRoutes from './routes/auth';
+import productRoutes from './routes/products';
+import cartRoutes from './routes/cart';
+import orderRoutes from './routes/orders';
+import uploadRoutes from './routes/upload';
+import adminRoutes from './routes/admin';
+
 dotenv.config();
 
 const app = express();
@@ -11,10 +18,9 @@ const PORT = process.env.PORT || 5000;
 app.use(cors({ origin: process.env.FRONTEND_URL || 'http://localhost:3000' }));
 app.use(express.json());
 
-// Healthcheck endpoint
-app.get('/api/health', async (req, res) => {
+// Health check
+app.get('/api/health', async (_req, res) => {
   try {
-    // Check database connectivity
     await prisma.$queryRaw`SELECT 1`;
     res.json({ status: 'ok', database: 'connected' });
   } catch (error: any) {
@@ -22,11 +28,20 @@ app.get('/api/health', async (req, res) => {
   }
 });
 
-// Get all users
-app.get('/api/users', async (req, res) => {
+// Mount routes
+app.use('/api/auth', authRoutes);
+app.use('/api/products', productRoutes);
+app.use('/api/cart', cartRoutes);
+app.use('/api/orders', orderRoutes);
+app.use('/api/upload', uploadRoutes);
+app.use('/api/admin', adminRoutes);
+
+// Legacy users endpoint (kept for backward compat)
+app.get('/api/users', async (_req, res) => {
   try {
     const users = await prisma.user.findMany({
       orderBy: { createdAt: 'desc' },
+      select: { id: true, email: true, name: true, createdAt: true },
     });
     res.json(users);
   } catch (error: any) {
@@ -34,27 +49,10 @@ app.get('/api/users', async (req, res) => {
   }
 });
 
-// Create a user
-app.post('/api/users', async (req, res) => {
-  const { email, name } = req.body;
-  if (!email) {
-    return res.status(400).json({ error: 'Email is required' });
-  }
-  try {
-    const user = await prisma.user.create({
-      data: { email, name },
-    });
-    res.status(201).json(user);
-  } catch (error: any) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// Export app for testing purposes
 export default app;
 
 if (process.env.NODE_ENV !== 'test') {
   app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`🚀 Server running on http://localhost:${PORT}`);
   });
 }

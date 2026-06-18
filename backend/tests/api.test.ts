@@ -1,11 +1,12 @@
-import { describe, beforeAll, it, expect,afterAll } from '@jest/globals';
+import { describe, beforeAll, it, expect, afterAll } from '@jest/globals';
 import request from 'supertest';
 import app from '../src/index';
 import prisma from '../src/prisma';
 
+let userToken = '';
+
 describe('API Endpoints', () => {
   beforeAll(async () => {
-    // Basic clean up of test database before running tests
     try {
       await prisma.user.deleteMany();
     } catch (e) {
@@ -23,23 +24,23 @@ describe('API Endpoints', () => {
     expect(res.body).toHaveProperty('status', 'ok');
   });
 
-  it('POST /api/users should create a user', async () => {
+  it('POST /api/auth/register should create a user', async () => {
     const email = `test-${Date.now()}@example.com`;
-    const name = 'Test User';
+    const password = 'password123';
 
     const res = await request(app)
-      .post('/api/users')
-      .send({ email, name });
+      .post('/api/auth/register')
+      .send({ email, password, name: 'Test User', role: 'BUYER' });
 
     expect(res.statusCode).toBe(201);
-    expect(res.body).toHaveProperty('id');
-    expect(res.body.email).toBe(email);
-    expect(res.body.name).toBe(name);
+    expect(res.body).toHaveProperty('token');
+    expect(res.body.user.email).toBe(email);
+    userToken = res.body.token;
   });
 
-  it('GET /api/users should list users', async () => {
-    const res = await request(app).get('/api/users');
+  it('GET /api/products should list products', async () => {
+    const res = await request(app).get('/api/products');
     expect(res.statusCode).toBe(200);
-    expect(Array.isArray(res.body)).toBe(true);
+    expect(Array.isArray(res.body.products)).toBe(true);
   });
 });
