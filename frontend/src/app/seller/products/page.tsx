@@ -36,7 +36,7 @@ export default function SellerProductsPage() {
     fetchData();
   }, [isAuthenticated, user, authLoading, router]);
 
-  const fetchData = async () => {
+  async function fetchData() {
     try {
       const [prodRes, catRes] = await Promise.all([
         productsApi.list({ sellerId: user?.id ?? 0, limit: 100 }),

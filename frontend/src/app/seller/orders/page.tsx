@@ -13,16 +13,7 @@ export default function SellerOrdersPage() {
   const [orders, setOrders] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (authLoading) return;
-    if (!isAuthenticated || user?.role !== 'SELLER') {
-      router.push('/login');
-      return;
-    }
-    fetchOrders();
-  }, [isAuthenticated, user, authLoading, router]);
-
-  const fetchOrders = async () => {
+  async function fetchOrders() {
     try {
       const res = await ordersApi.sellerOrders();
       setOrders(res.data);
@@ -31,7 +22,16 @@ export default function SellerOrdersPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }
+
+  useEffect(() => {
+    if (authLoading) return;
+    if (!isAuthenticated || user?.role !== 'SELLER') {
+      router.push('/login');
+      return;
+    }
+    fetchOrders();
+  }, [isAuthenticated, user, authLoading, router]);
 
   const handleStatusUpdate = async (orderId: number, status: string) => {
     try {

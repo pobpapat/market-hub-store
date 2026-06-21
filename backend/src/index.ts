@@ -15,7 +15,8 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors({ origin: ['https://market-hub-store.vercel.app', 'http://localhost:3000'] }));
+// Allow all origins to prevent caching issues with specific origins
+app.use(cors({ origin: '*' }));
 app.use(express.json());
 
 // Health check

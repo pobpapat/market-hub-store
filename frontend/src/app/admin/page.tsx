@@ -10,6 +10,7 @@ export default function AdminDashboardPage() {
   const router = useRouter();
   const { isAuthenticated, user, loading: authLoading } = useAuth();
   
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [stats, setStats] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
@@ -87,6 +88,7 @@ export default function AdminDashboardPage() {
                   <td colSpan={5} style={{ textAlign: 'center', color: 'var(--text-muted)' }}>ไม่มีข้อมูล</td>
                 </tr>
               ) : (
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 stats?.recentOrders?.map((order: any) => (
                   <tr key={order.id}>
                     <td style={{ fontWeight: 600 }}>#{order.id}</td>

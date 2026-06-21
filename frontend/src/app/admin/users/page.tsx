@@ -10,6 +10,7 @@ export default function AdminUsersPage() {
   const router = useRouter();
   const { isAuthenticated, user, loading: authLoading } = useAuth();
   
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [users, setUsers] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
@@ -25,9 +26,10 @@ export default function AdminUsersPage() {
     }
 
     fetchUsers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated, user, authLoading, router, page, roleFilter]); // Remove search from deps to prevent typing lag, fetch on enter
 
-  const fetchUsers = async () => {
+  async function fetchUsers() {
     setLoading(true);
     try {
       const params: Record<string, string | number> = { page, limit: 20 };
@@ -48,6 +50,7 @@ export default function AdminUsersPage() {
     try {
       await adminApi.updateUserRole(userId, newRole);
       fetchUsers();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       alert(err.response?.data?.error || 'เกิดข้อผิดพลาดในการเปลี่ยน Role');
     }

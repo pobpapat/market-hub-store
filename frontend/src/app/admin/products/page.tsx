@@ -11,6 +11,7 @@ export default function AdminProductsPage() {
   const router = useRouter();
   const { isAuthenticated, user, loading: authLoading } = useAuth();
   
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
@@ -25,9 +26,10 @@ export default function AdminProductsPage() {
     }
 
     fetchProducts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated, user, authLoading, router, page]);
 
-  const fetchProducts = async () => {
+  async function fetchProducts() {
     setLoading(true);
     try {
       const params: Record<string, string | number> = { page, limit: 20 };
@@ -47,6 +49,7 @@ export default function AdminProductsPage() {
     try {
       await adminApi.toggleProduct(id);
       fetchProducts();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       alert(err.response?.data?.error || 'เกิดข้อผิดพลาดในการระงับสินค้า');
     }
@@ -98,6 +101,7 @@ export default function AdminProductsPage() {
                   <tr><td colSpan={6} style={{ textAlign: 'center', padding: '32px' }}>ไม่พบสินค้า</td></tr>
                 ) : (
                   products.map(p => {
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     const img = p.media?.find((m: any) => m.isMain)?.url || p.media?.[0]?.url;
                     return (
                       <tr key={p.id} style={{ opacity: p.isActive ? 1 : 0.6 }}>

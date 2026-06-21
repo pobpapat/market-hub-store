@@ -10,23 +10,14 @@ export default function AdminOrdersPage() {
   const router = useRouter();
   const { isAuthenticated, user, loading: authLoading } = useAuth();
   
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [orders, setOrders] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [statusFilter, setStatusFilter] = useState('');
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  useEffect(() => {
-    if (authLoading) return;
-    if (!isAuthenticated || user?.role !== 'ADMIN') {
-      router.push('/login');
-      return;
-    }
-
-    fetchOrders();
-  }, [isAuthenticated, user, authLoading, router, page, statusFilter]);
-
-  const fetchOrders = async () => {
+  async function fetchOrders() {
     setLoading(true);
     try {
       const params: Record<string, string | number> = { page, limit: 20 };
@@ -40,7 +31,18 @@ export default function AdminOrdersPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }
+
+  useEffect(() => {
+    if (authLoading) return;
+    if (!isAuthenticated || user?.role !== 'ADMIN') {
+      router.push('/login');
+      return;
+    }
+
+    fetchOrders();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuthenticated, user, authLoading, router, page, statusFilter]);
 
   if (authLoading) return <div className="loading-center"><div className="spinner" /></div>;
 

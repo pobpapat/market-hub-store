@@ -22,7 +22,7 @@ export default function CartPage() {
     fetchCart();
   }, [isAuthenticated, user, router]);
 
-  const fetchCart = async () => {
+  async function fetchCart() {
     try {
       const res = await cartApi.get();
       setCart(res.data);
