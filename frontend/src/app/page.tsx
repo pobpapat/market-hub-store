@@ -5,18 +5,6 @@ import { productsApi } from '@/lib/api';
 import ProductCard from '@/components/ProductCard';
 import Link from 'next/link';
 
-const CATEGORIES = [
-  { id: 0, name: 'ทั้งหมด', icon: '🏪' },
-  { id: 1, name: 'แฟชั่น', icon: '👗' },
-  { id: 2, name: 'อิเล็กทรอนิกส์', icon: '📱' },
-  { id: 3, name: 'บ้านและสวน', icon: '🏠' },
-  { id: 4, name: 'สุขภาพ', icon: '💊' },
-  { id: 5, name: 'กีฬา', icon: '⚽' },
-  { id: 6, name: 'ของเล่น', icon: '🧸' },
-  { id: 7, name: 'อาหาร', icon: '🍜' },
-  { id: 8, name: 'หนังสือ', icon: '📚' },
-];
-
 const SORT_OPTIONS = [
   { value: 'createdAt', label: 'ใหม่ล่าสุด' },
   { value: 'sold', label: 'ขายดี' },
@@ -33,6 +21,7 @@ export default function HomePage() {
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [categories, setCategories] = useState<any[]>([{ id: 0, name: 'ทั้งหมด' }]);
 
   const fetchProducts = useCallback(async () => {
     setLoading(true);
@@ -55,6 +44,12 @@ export default function HomePage() {
     if (q) setSearch(q);
   }, []);
 
+  useEffect(() => {
+    productsApi.categories().then(res => {
+      setCategories([{ id: 0, name: 'ทั้งหมด' }, ...res.data]);
+    }).catch(err => console.error(err));
+  }, []);
+
   useEffect(() => { fetchProducts(); }, [fetchProducts]);
 
   return (
@@ -62,7 +57,7 @@ export default function HomePage() {
       {/* Hero */}
       <section className="hero">
         <div style={{ position: 'relative', zIndex: 1 }}>
-          <h1 className="hero-title">🛍️ MarketHub<br />ตลาดซื้อขายออนไลน์</h1>
+          <h1 className="hero-title">️ MarketHub<br />ตลาดซื้อขายออนไลน์</h1>
           <p className="hero-subtitle">สินค้าคุณภาพ ราคาถูก ส่งไว ทั่วประเทศ</p>
           <div className="hero-actions">
             <Link href="#products" className="hero-btn-primary">เลือกซื้อสินค้า</Link>
@@ -78,7 +73,7 @@ export default function HomePage() {
             <h2 className="section-title">หมวดหมู่สินค้า</h2>
           </div>
           <div className="categories-grid">
-            {CATEGORIES.map(cat => (
+            {categories.map(cat => (
               <button
                 key={cat.id}
                 className={`category-card ${selectedCat === cat.id ? 'active' : ''}`}
@@ -93,7 +88,7 @@ export default function HomePage() {
 
         {/* Flash Sale */}
         <div className="flash-banner">
-          <span style={{ fontSize: '1.4rem' }}>⚡</span>
+          <span style={{ fontSize: '1.4rem' }}></span>
           <span className="flash-title">Flash Sale วันนี้เท่านั้น!</span>
           <span className="flash-timer">ลดสูงสุด 70%</span>
         </div>
@@ -125,7 +120,7 @@ export default function HomePage() {
             <div className="loading-center"><div className="spinner" /></div>
           ) : products.length === 0 ? (
             <div className="empty-state">
-              <div className="empty-icon">🔍</div>
+              <div className="empty-icon"></div>
               <div className="empty-title">ไม่พบสินค้า</div>
               <div className="empty-desc">ลองค้นหาด้วยคำอื่น หรือเปลี่ยนหมวดหมู่</div>
             </div>

@@ -31,7 +31,7 @@ export default function LoginPage() {
     <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px', background: 'linear-gradient(135deg, #fff7ed 0%, #fce7f3 100%)' }}>
       <form onSubmit={handleSubmit} className="form-card" style={{ maxWidth: '420px' }}>
         <div style={{ textAlign: 'center', marginBottom: '24px' }}>
-          <div style={{ fontSize: '3rem', marginBottom: '8px' }}>🛍️</div>
+          <div style={{ fontSize: '3rem', marginBottom: '8px' }}>️</div>
           <h1 className="form-title">เข้าสู่ระบบ</h1>
           <p className="form-subtitle">ยินดีต้อนรับกลับมา MarketHub</p>
         </div>

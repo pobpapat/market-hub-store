@@ -40,14 +40,14 @@ export default function AdminDashboardPage() {
   return (
     <div className="page-container">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
-        <h1 className="section-title">⚙️ Admin Dashboard</h1>
+        <h1 className="section-title">️ Admin Dashboard</h1>
       </div>
 
       {/* Navigation */}
       <div style={{ display: 'flex', gap: '12px', marginBottom: '32px', flexWrap: 'wrap' }}>
-        <Link href="/admin/users" className="btn btn-outline" style={{ borderColor: 'var(--border)', color: 'var(--text)' }}>👥 จัดการผู้ใช้</Link>
-        <Link href="/admin/products" className="btn btn-outline" style={{ borderColor: 'var(--border)', color: 'var(--text)' }}>📦 ตรวจสอบสินค้า</Link>
-        <Link href="/admin/orders" className="btn btn-outline" style={{ borderColor: 'var(--border)', color: 'var(--text)' }}>🛍️ ตรวจสอบคำสั่งซื้อ</Link>
+        <Link href="/admin/users" className="btn btn-outline" style={{ borderColor: 'var(--border)', color: 'var(--text)' }}> จัดการผู้ใช้</Link>
+        <Link href="/admin/products" className="btn btn-outline" style={{ borderColor: 'var(--border)', color: 'var(--text)' }}> ตรวจสอบสินค้า</Link>
+        <Link href="/admin/orders" className="btn btn-outline" style={{ borderColor: 'var(--border)', color: 'var(--text)' }}>️ ตรวจสอบคำสั่งซื้อ</Link>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '24px', marginBottom: '32px' }}>

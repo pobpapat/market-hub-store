@@ -76,6 +76,16 @@ router.get('/', async (req, res: Response) => {
   }
 });
 
+// GET /api/products/categories/all
+router.get('/categories/all', async (_req, res: Response) => {
+  try {
+    const categories = await prisma.category.findMany({ orderBy: { name: 'asc' } });
+    return res.json(categories);
+  } catch (error: any) {
+    return res.status(500).json({ error: error.message });
+  }
+});
+
 // GET /api/products/:id — single product with reviews
 router.get('/:id', async (req, res: Response) => {
   try {
@@ -257,14 +267,6 @@ router.post('/:id/reviews', authenticate, async (req: AuthRequest, res: Response
   }
 });
 
-// GET /api/products/categories/all
-router.get('/categories/all', async (_req, res: Response) => {
-  try {
-    const categories = await prisma.category.findMany({ orderBy: { name: 'asc' } });
-    return res.json(categories);
-  } catch (error: any) {
-    return res.status(500).json({ error: error.message });
-  }
-});
+
 
 export default router;

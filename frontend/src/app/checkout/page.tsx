@@ -83,7 +83,7 @@ export default function CheckoutPage() {
 
   return (
     <div className="page-container">
-      <h1 className="section-title" style={{ marginBottom: '24px' }}>💳 ชำระเงิน</h1>
+      <h1 className="section-title" style={{ marginBottom: '24px' }}> ชำระเงิน</h1>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 400px', gap: '32px' }}>
         
@@ -92,7 +92,7 @@ export default function CheckoutPage() {
           <form id="checkout-form" onSubmit={handlePlaceOrder} className="card card-lg" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             
             <div>
-              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '12px' }}>📍 ที่อยู่สำหรับจัดส่ง</h3>
+              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '12px' }}> ที่อยู่สำหรับจัดส่ง</h3>
               <textarea 
                 required
                 className="form-input"
@@ -117,7 +117,7 @@ export default function CheckoutPage() {
             </div>
 
             <div>
-              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '12px' }}>💰 วิธีการชำระเงิน</h3>
+              <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '12px' }}> วิธีการชำระเงิน</h3>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 <label style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '16px', border: '1px solid var(--border)', borderRadius: '8px', cursor: 'pointer', background: paymentMethod === 'mock_payment' ? 'var(--primary-light)' : 'white', borderColor: paymentMethod === 'mock_payment' ? 'var(--primary)' : 'var(--border)' }}>
                   <input 

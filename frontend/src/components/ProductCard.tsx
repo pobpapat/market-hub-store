@@ -24,7 +24,7 @@ export default function ProductCard({ product }: { product: Product }) {
 
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }).map((_, i) => (
-      <span key={i} style={{ color: i < Math.round(rating) ? '#f59e0b' : '#d1d5db', fontSize: '12px' }}>★</span>
+      <span key={i} style={{ color: i < Math.round(rating) ? '#f59e0b' : '#d1d5db', fontSize: '12px' }}></span>
     ));
   };
 
@@ -41,7 +41,7 @@ export default function ProductCard({ product }: { product: Product }) {
           />
         ) : (
           <div className="product-placeholder">
-            <span>🛍️</span>
+            <span>️</span>
           </div>
         )}
         {product.stock === 0 && (
@@ -55,7 +55,7 @@ export default function ProductCard({ product }: { product: Product }) {
           <span className="product-stars">{renderStars(product.rating)}</span>
           <span className="product-sold">ขายแล้ว {product.sold.toLocaleString()}</span>
         </div>
-        <p className="product-shop">🏪 {shopName}</p>
+        <p className="product-shop"> {shopName}</p>
       </div>
     </Link>
   );

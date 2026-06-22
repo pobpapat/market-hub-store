@@ -61,7 +61,7 @@ export default function SellerDashboardPage() {
   return (
     <div className="page-container">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
-        <h1 className="section-title">📊 แดชบอร์ดร้านค้า</h1>
+        <h1 className="section-title"> แดชบอร์ดร้านค้า</h1>
         <div style={{ display: 'flex', gap: '12px' }}>
           <Link href="/seller/products" className="btn btn-outline" style={{ borderColor: 'var(--border)', color: 'var(--text)' }}>
             จัดการสินค้า

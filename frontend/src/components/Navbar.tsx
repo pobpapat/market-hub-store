@@ -36,7 +36,7 @@ export default function Navbar() {
       <div className="navbar-inner">
         {/* Logo */}
         <Link href="/" className="navbar-logo">
-          <span className="logo-icon">🛍️</span>
+          <span className="logo-icon">️</span>
           <span className="logo-text">MarketHub</span>
         </Link>
 
@@ -84,23 +84,23 @@ export default function Navbar() {
                   <div className="dropdown-menu">
                     {user?.role === 'BUYER' && (
                       <>
-                        <Link href="/orders" className="dropdown-item">📦 คำสั่งซื้อของฉัน</Link>
-                        <Link href="/cart" className="dropdown-item">🛒 ตะกร้าสินค้า</Link>
+                        <Link href="/orders" className="dropdown-item"> คำสั่งซื้อของฉัน</Link>
+                        <Link href="/cart" className="dropdown-item"> ตะกร้าสินค้า</Link>
                       </>
                     )}
                     {user?.role === 'SELLER' && (
                       <>
-                        <Link href="/seller/dashboard" className="dropdown-item">📊 Dashboard</Link>
-                        <Link href="/seller/products" className="dropdown-item">📦 จัดการสินค้า</Link>
-                        <Link href="/seller/orders" className="dropdown-item">🛍️ คำสั่งซื้อ</Link>
+                        <Link href="/seller/dashboard" className="dropdown-item"> Dashboard</Link>
+                        <Link href="/seller/products" className="dropdown-item"> จัดการสินค้า</Link>
+                        <Link href="/seller/orders" className="dropdown-item">️ คำสั่งซื้อ</Link>
                       </>
                     )}
                     {user?.role === 'ADMIN' && (
-                      <Link href="/admin" className="dropdown-item">⚙️ Admin Panel</Link>
+                      <Link href="/admin" className="dropdown-item">️ Admin Panel</Link>
                     )}
                     <hr className="dropdown-divider" />
                     <button onClick={handleLogout} className="dropdown-item dropdown-logout">
-                      🚪 ออกจากระบบ
+                       ออกจากระบบ
                     </button>
                   </div>
                 )}

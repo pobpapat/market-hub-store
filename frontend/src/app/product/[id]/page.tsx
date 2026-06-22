@@ -89,7 +89,7 @@ export default function ProductDetailPage() {
             {activeImg ? (
               <Image src={activeImg} alt={product.name} fill className="product-img" style={{ objectFit: 'contain' }} />
             ) : (
-              <div className="product-placeholder">🛍️</div>
+              <div className="product-placeholder">️</div>
             )}
           </div>
           <div style={{ display: 'flex', gap: '12px', overflowX: 'auto', paddingBottom: '8px' }}>
@@ -105,7 +105,7 @@ export default function ProductDetailPage() {
                 {m.type === 'image' ? (
                   <Image src={m.url} alt="" fill style={{ objectFit: 'cover' }} />
                 ) : (
-                  <div style={{ width: '100%', height: '100%', background: '#111', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>▶️</div>
+                  <div style={{ width: '100%', height: '100%', background: '#111', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>️</div>
                 )}
               </button>
             ))}
@@ -117,7 +117,7 @@ export default function ProductDetailPage() {
           <h1 style={{ fontSize: '1.8rem', fontWeight: 800, lineHeight: 1.3 }}>{product.name}</h1>
           
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-            <span style={{ color: '#f59e0b', fontWeight: 700, fontSize: '1.2rem' }}>★ {product.rating.toFixed(1)}</span>
+            <span style={{ color: '#f59e0b', fontWeight: 700, fontSize: '1.2rem' }}> {product.rating.toFixed(1)}</span>
             <span style={{ color: 'var(--text-muted)' }}>|</span>
             <span style={{ color: 'var(--text-muted)' }}>ขายแล้ว {product.sold} ชิ้น</span>
           </div>
@@ -150,7 +150,7 @@ export default function ProductDetailPage() {
               onClick={handleAddToCart}
               disabled={addingToCart || product.stock === 0}
             >
-              {addingToCart ? 'กำลังเพิ่ม...' : '🛒 เพิ่มลงตะกร้า'}
+              {addingToCart ? 'กำลังเพิ่ม...' : ' เพิ่มลงตะกร้า'}
             </button>
             <button 
               className="btn btn-orange btn-lg" 
@@ -187,7 +187,7 @@ export default function ProductDetailPage() {
                         key={star} 
                         className={`star-btn ${star <= reviewRating ? 'active' : ''}`}
                         onClick={() => setReviewRating(star)}
-                      >★</span>
+                      ></span>
                     ))}
                   </div>
                 </div>
@@ -216,7 +216,7 @@ export default function ProductDetailPage() {
                       </div>
                       <div>
                         <div style={{ fontSize: '0.85rem', fontWeight: 600 }}>{rev.user.name}</div>
-                        <div style={{ color: '#f59e0b', fontSize: '0.8rem' }}>{'★'.repeat(rev.rating)}{'☆'.repeat(5 - rev.rating)}</div>
+                        <div style={{ color: '#f59e0b', fontSize: '0.8rem' }}>{''.repeat(rev.rating)}{''.repeat(5 - rev.rating)}</div>
                       </div>
                       <div style={{ marginLeft: 'auto', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
                         {new Date(rev.createdAt).toLocaleDateString('th-TH')}
@@ -236,7 +236,7 @@ export default function ProductDetailPage() {
         <div>
           <div className="card" style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center', textAlign: 'center' }}>
             <div className="user-avatar" style={{ width: '80px', height: '80px', fontSize: '2rem', background: '#f3f4f6', color: 'var(--text-muted)' }}>
-              🏪
+              
             </div>
             <div>
               <h3 style={{ fontWeight: 700, fontSize: '1.2rem' }}>{product.seller?.shopName || product.seller?.name || 'ร้านค้า'}</h3>

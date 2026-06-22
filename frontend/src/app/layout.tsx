@@ -23,10 +23,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <footer className="site-footer">
             <div className="footer-inner">
               <div className="footer-brand">
-                <span className="logo-icon">🛍️</span>
+                <span className="logo-icon">️</span>
                 <span className="logo-text">MarketHub</span>
               </div>
-              <p className="footer-copy">© 2026 MarketHub. All rights reserved.</p>
+              <p className="footer-copy"> 2026 MarketHub. All rights reserved.</p>
             </div>
           </footer>
         </AuthProvider>

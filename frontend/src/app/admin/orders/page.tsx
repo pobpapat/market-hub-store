@@ -51,7 +51,7 @@ export default function AdminOrdersPage() {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <Link href="/admin" style={{ color: 'var(--text-muted)' }}>← กลับ</Link>
-          <h1 className="section-title">🛍️ ตรวจสอบคำสั่งซื้อ</h1>
+          <h1 className="section-title">️ ตรวจสอบคำสั่งซื้อ</h1>
         </div>
       </div>
 

@@ -124,7 +124,7 @@ export default function SellerProductsPage() {
   return (
     <div className="page-container">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
-        <h1 className="section-title">📦 จัดการสินค้า</h1>
+        <h1 className="section-title">จัดการสินค้า</h1>
         <button onClick={() => openModal()} className="btn btn-primary">
           + เพิ่มสินค้าใหม่
         </button>
@@ -200,7 +200,7 @@ export default function SellerProductsPage() {
                   onClick={() => fileInputRef.current?.click()}
                   style={{ padding: '24px', marginBottom: '8px' }}
                 >
-                  <div className="upload-icon">📸</div>
+                  <div className="upload-icon"></div>
                   <div className="upload-text">คลิกเพื่ออัปโหลดรูปภาพ (สูงสุด 10 รูป)</div>
                   <input 
                     type="file" 

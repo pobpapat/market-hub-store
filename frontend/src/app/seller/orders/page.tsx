@@ -46,11 +46,11 @@ export default function SellerOrdersPage() {
 
   return (
     <div className="page-container">
-      <h1 className="section-title" style={{ marginBottom: '24px' }}>🛍️ จัดการคำสั่งซื้อ</h1>
+      <h1 className="section-title" style={{ marginBottom: '24px' }}>️ จัดการคำสั่งซื้อ</h1>
 
       {orders.length === 0 ? (
         <div className="empty-state card">
-          <div className="empty-icon">📝</div>
+          <div className="empty-icon"></div>
           <div className="empty-title">ยังไม่มีคำสั่งซื้อใหม่</div>
           <div className="empty-desc">โปรโมทสินค้าของคุณเพิ่มเพื่อเพิ่มยอดขาย!</div>
         </div>

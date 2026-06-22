@@ -65,11 +65,11 @@ export default function CartPage() {
 
   return (
     <div className="page-container">
-      <h1 className="section-title" style={{ marginBottom: '24px' }}>🛒 ตะกร้าสินค้า</h1>
+      <h1 className="section-title" style={{ marginBottom: '24px' }}> ตะกร้าสินค้า</h1>
 
       {items.length === 0 ? (
         <div className="empty-state card">
-          <div className="empty-icon">🛒</div>
+          <div className="empty-icon"></div>
           <div className="empty-title">ตะกร้าของคุณว่างเปล่า</div>
           <div className="empty-desc">ไปหาของมาเติมตะกร้ากันเถอะ</div>
           <Link href="/" className="btn btn-primary" style={{ marginTop: '16px' }}>กลับไปช้อปปิ้ง</Link>
@@ -87,7 +87,7 @@ export default function CartPage() {
                     {img ? (
                       <Image src={img} alt={p.name} fill style={{ objectFit: 'cover' }} />
                     ) : (
-                      <div className="product-placeholder" style={{ fontSize: '1.5rem' }}>🛍️</div>
+                      <div className="product-placeholder" style={{ fontSize: '1.5rem' }}>️</div>
                     )}
                   </Link>
 
@@ -95,7 +95,7 @@ export default function CartPage() {
                     <Link href={`/product/${p.id}`} style={{ fontWeight: 600, color: 'var(--text)', display: 'block', marginBottom: '4px' }}>
                       {p.name}
                     </Link>
-                    <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>🏪 {p.seller?.shopName || p.seller?.name}</div>
+                    <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}> {p.seller?.shopName || p.seller?.name}</div>
                     <div style={{ color: 'var(--primary)', fontWeight: 800, marginTop: '8px' }}>
                       ฿{p.price.toLocaleString()}
                     </div>

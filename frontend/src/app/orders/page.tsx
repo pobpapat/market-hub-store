@@ -54,15 +54,15 @@ function OrdersList() {
     <div className="page-container">
       {success && (
         <div className="alert alert-success" style={{ marginBottom: '24px' }}>
-          ✅ สั่งซื้อสินค้าสำเร็จ! ขอบคุณที่ใช้บริการ MarketHub
+           สั่งซื้อสินค้าสำเร็จ! ขอบคุณที่ใช้บริการ MarketHub
         </div>
       )}
 
-      <h1 className="section-title" style={{ marginBottom: '24px' }}>📦 คำสั่งซื้อของฉัน</h1>
+      <h1 className="section-title" style={{ marginBottom: '24px' }}> คำสั่งซื้อของฉัน</h1>
 
       {orders.length === 0 ? (
         <div className="empty-state card">
-          <div className="empty-icon">📦</div>
+          <div className="empty-icon"></div>
           <div className="empty-title">ยังไม่มีคำสั่งซื้อ</div>
           <div className="empty-desc">คุณยังไม่ได้ทำการสั่งซื้อสินค้าใดๆ</div>
           <Link href="/" className="btn btn-primary" style={{ marginTop: '16px' }}>เริ่มช้อปปิ้งเลย</Link>
